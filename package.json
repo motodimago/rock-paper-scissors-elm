@@ -5,12 +5,15 @@
   "main": "index.js",
   "scripts": {
     "build": "elm make src/Main.elm --optimize --output public/elm.js",
+    "dev": "elm-live src/Main.elm --pushstate --start-page=index.html --dir=public -- --output=public/elm.js --debug",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "elm": "^0.19.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "elm-live": "^4.0.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/motodimago/rock-paper-scissors-elm.git"
