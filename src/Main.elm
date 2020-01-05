@@ -7,7 +7,7 @@ import Random
 -- MAIN
 
 main =
-    Browser.document
+    Browser.element
     { init = init
       , view = view
       , update = update
@@ -81,21 +81,16 @@ subscriptions model =
 
 -- VIEW
 
-view : Model -> Browser.Document Msg
+view : Model -> Html Msg
 view model =
-    { title = "Rock Paper Scissors elm"
-    , body =
-      [ 
-        div []
-        [ viewResult model.result
-        , div[] [text("Mine: " ++ viewHand model.mine)]
-        , div[] [text("Enemy: " ++ viewHand model.enemy)]
-        , button [ onClick (Next Rock) ] [ text "Rock" ]
-        , button [ onClick (Next Paper) ] [ text "Paper" ]
-        , button [ onClick (Next Scissors) ] [ text "Scissors" ]
-        ]
+      div []
+      [ viewResult model.result
+      , div[] [text("Mine: " ++ viewHand model.mine)]
+      , div[] [text("Enemy: " ++ viewHand model.enemy)]
+      , button [ onClick (Next Rock) ] [ text "Rock" ]
+      , button [ onClick (Next Paper) ] [ text "Paper" ]
+      , button [ onClick (Next Scissors) ] [ text "Scissors" ]
       ]
-    }
 
 viewHand : Hand -> String
 viewHand resultHand = 
