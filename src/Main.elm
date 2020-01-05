@@ -1,5 +1,5 @@
 import Browser
-import Html exposing (Html, button, div, text)
+import Html exposing (Html, button, div, text, img)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Random
@@ -83,33 +83,35 @@ subscriptions model =
 
 view : Model -> Html Msg
 view model =
-      div []
-      [ viewResult model.result
-      , div[] [text("Mine: " ++ viewHand model.mine)]
-      , div[] [text("Enemy: " ++ viewHand model.enemy)]
-      , button [ onClick (Next Rock) ] [ text "Rock" ]
-      , button [ onClick (Next Paper) ] [ text "Paper" ]
-      , button [ onClick (Next Scissors) ] [ text "Scissors" ]
+      div [ class "app" ]
+      [ div[ class "enemy"] [ img[ src (viewHand model.enemy) ][]]
+      , div[ class "result"] [ viewResult model.result ]
+      , div[ class "mine"] [ img[ src (viewHand model.mine) ][]]
+      , div[ class "buttons" ]
+        [ div[ class "rock", onClick (Next Rock) ] [ img[ src "/img/rock.svg"][] ]
+        , div[ class "paper", onClick (Next Paper) ] [ img[ src "/img/paper.svg"][] ]
+        , div[ class "scissors", onClick (Next Scissors) ] [ img[ src "/img/scissors.svg"][] ]
+        ]
       ]
 
 viewHand : Hand -> String
 viewHand resultHand = 
   if (resultHand == Rock) then
-    "rock"
+    "/img/rock.svg"
   else if (resultHand == Paper) then
-    "paper"
+    "/img/paper.svg"
   else if (resultHand == Scissors) then
-    "scissors"
+    "/img/scissors.svg"
   else 
     ""
 
 viewResult : GameResult -> Html msg 
 viewResult gameResult = 
   if (gameResult == Win) then
-    div[ style "color" "green" ] [text("Win")]
+    div[ class "win" ] [text("Win")]
   else if (gameResult == Lose) then
-    div[ style "color" "red" ] [text("Lose")]
+    div[ class "lose" ] [text("Lose")]
   else if (gameResult == Draw) then
-    div[ style "color" "gray" ] [text("Draw")]
+    div[ class "draw" ] [text("Draw")]
   else 
     div[] []
